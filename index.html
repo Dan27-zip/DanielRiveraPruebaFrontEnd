@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Presupuesto de Viaje</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="estilos.css"/>
+</head>
+<body>
+
+  <header>
+    <h1>Calculadora de <span>Presupuesto</span></h1>
+  </header>
+
+  <div class="layout">
+
+    <div class="card" id="cardFormulario">
+      <div class="card-title">
+        <span class="icon">📋</span> Registrar Gasto
+      </div>
+
+      <div class="edit-notice" id="editNotice">
+        ✏️ Modo edición — modifica el gasto y guarda los cambios.
+      </div>
+
+      <div class="form-group">
+        <label for="selectCategoria">Categoría</label>
+        <select id="selectCategoria">
+          <option value="">— Selecciona una categoría —</option>
+          <option value="Transporte">🚌 Transporte</option>
+          <option value="Comida">🍽 Comida</option>
+          <option value="Alojamiento">🏨 Alojamiento</option>
+          <option value="Otros">🎁 Otros</option>
+        </select>
+        <span class="msg-error" id="errCategoria"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="inputNombre">Nombre (opcional)</label>
+        <input
+          type="text"
+          id="inputNombre"
+          placeholder="Ej. Taxi al aeropuerto"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inputMonto">Monto ($)</label>
+        <input
+          type="number"
+          id="inputMonto"
+          placeholder="Ej. 15000"
+          min="1"
+        />
+        <span class="msg-error" id="errMonto"></span>
+      </div>
+
+      <button class="btn btn-primary" id="btnAgregar" onclick="manejarFormulario()">
+        ➕ Agregar Gasto
+      </button>
+
+      <button
+        class="btn btn-cancel"
+        id="btnCancelar"
+        style="display:none; margin-top:.6rem;"
+        onclick="cancelarEdicion()"
+      >
+        Cancelar edición
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span class="icon">📊</span> Resumen de Gastos
+      </div>
+
+      <div class="summary-box">
+        <div>
+          <div class="label-total">Total acumulado</div>
+          <div class="amount-total" id="totalAcumulado">$0</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="label-total">Límite de seguridad</div>
+          <div style="font-size:1.1rem; font-weight:600; color:var(--color-muted);">$2.000.000</div>
+        </div>
+      </div>
+
+      <div class="cat-pills" id="catPills">
+        <span class="cat-pill" id="pillTransporte">🚌 Transporte: $0</span>
+        <span class="cat-pill" id="pillComida">🍽 Comida: $0</span>
+        <span class="cat-pill" id="pillAlojamiento">🏨 Alojamiento: $0</span>
+        <span class="cat-pill" id="pillOtros">🎁 Otros: $0</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="tablaGastos">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Categoría</th>
+              <th>Nombre</th>
+              <th>Monto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTabla">
+            </tbody>
+        </table>
+
+        <div class="empty-state" id="estadoVacio">
+          <div class="emoji">🧳</div>
+          <p>Aún no hay gastos registrados.<br>¡Comienza agregando el primero!</p>
+        </div>
+      </div>
+    </div>
+
+  </div><div id="toast"></div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
